@@ -8,3 +8,4 @@ Large-scale weakly-supervised pre-training for video action recognition
 https://paperswithcode.com/paper/large-scale-weakly-supervised-pre-training  
 https://github.com/microsoft/computervision-recipes
 
+설치 방법은 Setup.md 참조
