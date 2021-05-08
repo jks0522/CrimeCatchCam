@@ -8,4 +8,4 @@ Large-scale weakly-supervised pre-training for video action recognition
 https://paperswithcode.com/paper/large-scale-weakly-supervised-pre-training  
 https://github.com/microsoft/computervision-recipes
 
-설치 방법은 [SETUP.md] 참조
+설치 방법은 [SETUP.md](https://github.com/jks0522/CrimeCatchCam/blob/main/SETUP.md) 참조
