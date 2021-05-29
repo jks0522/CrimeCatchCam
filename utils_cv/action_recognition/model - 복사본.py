@@ -54,6 +54,7 @@ MODELS = {
     "r2plus1d_34_8_kinetics": 400,
 }
 
+
 class VideoLearner(object):
     """ Video recognition learner object that handles training loop and evaluation. """
 
@@ -612,7 +613,7 @@ class VideoLearner(object):
                 + "<br>".join([f"{k} ({v:.3f})" for k, v in top5])
                 + "</p>"
             )
-            
+
             # Plot final results nicely
             update_println(println)
             scores_sum -= scores_cache.popleft()
@@ -707,9 +708,13 @@ class VideoLearner(object):
                 now = datetime.datetime.now()
                 test_data = {
                     'time' : str(now),
-                    'index' : test_index
-                    'action' : 'hi'
+                    'index': test_index
                 }
+                """
+                if test_index == 1:
+                    with open(str(test_index) + ".json", "w") as json_file:
+                        json.dump(test_data, json_file)
+                """
                 if test_index % 10 == 0:
                     with open("test_file.json", "w") as json_file:
                         json.dump(test_data, json_file)
