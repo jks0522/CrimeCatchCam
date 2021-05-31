@@ -604,7 +604,7 @@ class VideoLearner(object):
                 target_labels=target_labels,
             )
             top5 = sorted(top5_label_score_dict.items(), key=lambda kv: -kv[1])
-
+            
             # fps and preds
             println = (
                 f"{1 // dur} fps"
@@ -663,6 +663,7 @@ class VideoLearner(object):
             d_caption.update(IPython.display.HTML(println))
         
         test_index = 1
+        action_type = 'hi'
         
         while True:
             try:
@@ -703,16 +704,17 @@ class VideoLearner(object):
                 h = round(h * scale)
                 im = im.resize((h, w))
                 
-                
                 now = datetime.datetime.now()
                 test_data = {
                     'time' : str(now),
-                    'index' : test_index
-                    'action' : 'hi'
+                    'index' : test_index,
+                    'action' : action_type
                 }
+                
                 if test_index % 10 == 0:
                     with open("test_file.json", "w") as json_file:
                         json.dump(test_data, json_file)
+                    im.save("Test.jpeg", "jpeg")
                 test_index = test_index + 1
                 
                 d_video.update(IPython.display.Image(data=f.getvalue()))
