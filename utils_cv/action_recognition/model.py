@@ -662,7 +662,7 @@ class VideoLearner(object):
         def update_println(println):
             d_caption.update(IPython.display.HTML(println))
         
-        test_index = 1
+        frame_num = 1
         action_type = 'hi'
         
         while True:
@@ -697,6 +697,19 @@ class VideoLearner(object):
                 im = Image.fromarray(frame)
                 im.save(f, "jpeg")
 
+                now = datetime.datetime.now()
+                test_data = {
+                    'time' : str(now),
+                    'frame_num' : frame_num,
+                    'action' : action_type
+                }
+                
+                if frame_num % 10 == 0:
+                    txt_file = open("test.txt", 'a')
+                    txt_file.write(str(test_data) + '\n')
+                    im.save("Test.jpeg", "jpeg")
+                frame_num = frame_num + 1
+                
                 # resize frames to avoid flicker for windows
                 w, h = frame.shape[0], frame.shape[1]
                 scale = 300.0 / max(w, h)
@@ -704,18 +717,7 @@ class VideoLearner(object):
                 h = round(h * scale)
                 im = im.resize((h, w))
                 
-                now = datetime.datetime.now()
-                test_data = {
-                    'time' : str(now),
-                    'index' : test_index,
-                    'action' : action_type
-                }
-                
-                if test_index % 10 == 0:
-                    with open("test_file.json", "w") as json_file:
-                        json.dump(test_data, json_file)
-                    im.save("Test.jpeg", "jpeg")
-                test_index = test_index + 1
+
                 
                 d_video.update(IPython.display.Image(data=f.getvalue()))
                 sleep(0.03)
