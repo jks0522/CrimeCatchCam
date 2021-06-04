@@ -53,6 +53,7 @@ MODELS = {
     "r2plus1d_34_8_ig65m": 487,
     "r2plus1d_34_8_kinetics": 400,
 }
+global testhome
 
 class VideoLearner(object):
     """ Video recognition learner object that handles training loop and evaluation. """
@@ -568,6 +569,7 @@ class VideoLearner(object):
         target_labels: List[str],
         transforms: Compose,
         update_println: Callable,
+        print_action: Callable,
     ) -> None:
         """ Predicts frames """
         # set model device and to eval mode
@@ -613,6 +615,12 @@ class VideoLearner(object):
                 + "</p>"
             )
             
+            
+            actionprint = (
+                " ".join([f"{k} ({v:.3f})" for k, v in top5])
+            )
+            
+            print_action(actionprint)
             # Plot final results nicely
             update_println(println)
             scores_sum -= scores_cache.popleft()
@@ -662,8 +670,15 @@ class VideoLearner(object):
         def update_println(println):
             d_caption.update(IPython.display.HTML(println))
         
+        def print_action(actionprint):
+            now = datetime.datetime.now()
+            txt_file = open("time.txt", 'w')
+            txt_file.write('time : ' +  str(now) + '\n')
+            txt_file = open("action.txt", 'w')
+            txt_file.write(str(actionprint) + '\n')
+            
+            
         frame_num = 1
-        action_type = 'hi'
         
         while True:
             try:
@@ -689,6 +704,7 @@ class VideoLearner(object):
                                 target_labels,
                                 transforms,
                                 update_println,
+                                print_action
                             ),
                         ).start()
 
@@ -697,17 +713,11 @@ class VideoLearner(object):
                 im = Image.fromarray(frame)
                 im.save(f, "jpeg")
 
-                now = datetime.datetime.now()
-                test_data = {
-                    'time' : str(now),
-                    'frame_num' : frame_num,
-                    'action' : action_type
-                }
                 
                 if frame_num % 10 == 0:
-                    txt_file = open("test.txt", 'a')
-                    txt_file.write(str(test_data) + '\n')
-                    im.save("Test.jpeg", "jpeg")
+                    """txt_file = open("test.txt", 'a')
+                    txt_file.write(str(test_data) + '\n')"""
+                    im.save("capture.jpeg", "jpeg")
                 frame_num = frame_num + 1
                 
                 # resize frames to avoid flicker for windows

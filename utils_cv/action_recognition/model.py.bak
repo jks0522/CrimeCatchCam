@@ -54,7 +54,6 @@ MODELS = {
     "r2plus1d_34_8_kinetics": 400,
 }
 
-
 class VideoLearner(object):
     """ Video recognition learner object that handles training loop and evaluation. """
 
@@ -605,7 +604,7 @@ class VideoLearner(object):
                 target_labels=target_labels,
             )
             top5 = sorted(top5_label_score_dict.items(), key=lambda kv: -kv[1])
-
+            
             # fps and preds
             println = (
                 f"{1 // dur} fps"
@@ -613,7 +612,7 @@ class VideoLearner(object):
                 + "<br>".join([f"{k} ({v:.3f})" for k, v in top5])
                 + "</p>"
             )
-
+            
             # Plot final results nicely
             update_println(println)
             scores_sum -= scores_cache.popleft()
@@ -663,7 +662,8 @@ class VideoLearner(object):
         def update_println(println):
             d_caption.update(IPython.display.HTML(println))
         
-        test_index = 1
+        frame_num = 1
+        action_type = 'hi'
         
         while True:
             try:
@@ -697,6 +697,19 @@ class VideoLearner(object):
                 im = Image.fromarray(frame)
                 im.save(f, "jpeg")
 
+                now = datetime.datetime.now()
+                test_data = {
+                    'time' : str(now),
+                    'frame_num' : frame_num,
+                    'action' : println
+                }
+                
+                if frame_num % 10 == 0:
+                    txt_file = open("test.txt", 'a')
+                    txt_file.write(str(test_data) + '\n')
+                    im.save("Test.jpeg", "jpeg")
+                frame_num = frame_num + 1
+                
                 # resize frames to avoid flicker for windows
                 w, h = frame.shape[0], frame.shape[1]
                 scale = 300.0 / max(w, h)
@@ -704,21 +717,7 @@ class VideoLearner(object):
                 h = round(h * scale)
                 im = im.resize((h, w))
                 
-                
-                now = datetime.datetime.now()
-                test_data = {
-                    'time' : str(now),
-                    'index': test_index
-                }
-                """
-                if test_index == 1:
-                    with open(str(test_index) + ".json", "w") as json_file:
-                        json.dump(test_data, json_file)
-                """
-                if test_index % 10 == 0:
-                    with open("test_file.json", "w") as json_file:
-                        json.dump(test_data, json_file)
-                test_index = test_index + 1
+
                 
                 d_video.update(IPython.display.Image(data=f.getvalue()))
                 sleep(0.03)
