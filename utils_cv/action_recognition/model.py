@@ -686,8 +686,10 @@ class VideoLearner(object):
             txt_file.write(str(actionprint) + '\n')
             txt_file = open("timeaction.txt", 'a')
             txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
+        if os.path.isdir('images'):
+            shutil.rmtree(os.path.abspath('.') +  '/images')
         
-        shutil.rmtree('C:/Users/LG/CrimeCatchCam/scenarios/action_recognition/images')
+            
         os.mkdir('images')
         
         
