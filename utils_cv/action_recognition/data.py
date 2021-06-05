@@ -47,7 +47,7 @@ class Urls:
     # label maps
     kinetics_label_map = "https://github.com/microsoft/ComputerVision/files/3746975/kinetics400_lable_map.txt"
     hmdb51_label_map = "https://github.com/microsoft/ComputerVision/files/3746963/hmdb51_label_map.txt"
-
+    
     # milk bottle action split test files
     hmdb_train_split_1 = urljoin(base, "hmdb51_vid_train_split_1.txt")
     hmdb_test_split_1 = urljoin(base, "hmdb51_vid_test_split_1.txt")

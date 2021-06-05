@@ -670,15 +670,24 @@ class VideoLearner(object):
         def update_println(println):
             d_caption.update(IPython.display.HTML(println))
         
+        frame_num = 0
+        
+        text_count = 1
+        
+        open("timeaction.txt", 'w')
+        
         def print_action(actionprint):
-            now = datetime.datetime.now()
+            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
             txt_file = open("time.txt", 'w')
             txt_file.write(str(now) + '\n')
             txt_file = open("action.txt", 'w')
             txt_file.write(str(actionprint) + '\n')
+            txt_file = open("timeaction.txt", 'a')
+            txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
             
             
-        frame_num = 1
+        
         
         while True:
             try:
@@ -717,6 +726,7 @@ class VideoLearner(object):
                 if frame_num % 10 == 0:
                     """txt_file = open("test.txt", 'a')
                     txt_file.write(str(test_data) + '\n')"""
+                    im.save("images/catpure" + str(round(frame_num/10 + 1)) + ".jpeg", "jpeg")
                     im.save("capture.jpeg", "jpeg")
                 frame_num = frame_num + 1
                 
