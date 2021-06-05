@@ -686,7 +686,7 @@ class VideoLearner(object):
             txt_file = open("timeaction.txt", 'a')
             txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
             
-            
+        os.mkdir('images')
         
         
         while True:
