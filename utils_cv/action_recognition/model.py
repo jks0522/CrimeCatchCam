@@ -11,8 +11,9 @@ import matplotlib.pyplot as plt
 import torch.cuda as cuda
 from sklearn.metrics import accuracy_score
 
-import json
+import shutil
 import datetime
+
 
 try:
     from apex import amp
@@ -685,7 +686,8 @@ class VideoLearner(object):
             txt_file.write(str(actionprint) + '\n')
             txt_file = open("timeaction.txt", 'a')
             txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
-            
+        
+        shutil.rmtree('C:/Users/LG/CrimeCatchCam/scenarios/action_recognition/images')
         os.mkdir('images')
         
         
