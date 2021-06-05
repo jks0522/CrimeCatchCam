@@ -54,7 +54,7 @@ MODELS = {
     "r2plus1d_34_8_ig65m": 487,
     "r2plus1d_34_8_kinetics": 400,
 }
-global testhome
+text_count = 0
 
 class VideoLearner(object):
     """ Video recognition learner object that handles training loop and evaluation. """
@@ -630,7 +630,7 @@ class VideoLearner(object):
         window.popleft()
         if is_ready:
             is_ready[0] = True
-
+    
     def predict_video(
         self,
         video_fpath: str,
@@ -674,24 +674,31 @@ class VideoLearner(object):
         frame_num = 0
         
         text_count = 1
-        
-        open("timeaction.txt", 'w')
-        
-        def print_action(actionprint):
-            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            
-            txt_file = open("time.txt", 'w')
-            txt_file.write(str(now) + '\n')
-            txt_file = open("action.txt", 'w')
-            txt_file.write(str(actionprint) + '\n')
-            txt_file = open("timeaction.txt", 'a')
-            txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
         if os.path.isdir('images'):
             shutil.rmtree(os.path.abspath('.') +  '/images')
         
             
         os.mkdir('images')
+        open("timeaction.txt", 'w')
+        text_count = 0
         
+        def print_action(actionprint):
+            global text_count
+            if frame_num % 10 == 0:
+                now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                txt_file = open("time.txt", 'w')
+                txt_file.write(str(now) + '\n')
+                txt_file = open("action.txt", 'w')
+                txt_file.write(str(actionprint) + '\n')
+                txt_file = open("timeaction.txt", 'a')
+                text_count = text_count + 1
+                txt_file.write(str(text_count) + ' ' + str(now) + ', ' + str(actionprint) + '\n')
+                
+                frame = video_reader.next().asnumpy()
+                im = Image.fromarray(frame)
+                im.save("images/catpure" + str(text_count) + ".jpeg", "jpeg")
+                im.save("capture.jpeg", "jpeg")
+                
         
         while True:
             try:
@@ -730,8 +737,7 @@ class VideoLearner(object):
                 if frame_num % 10 == 0:
                     """txt_file = open("test.txt", 'a')
                     txt_file.write(str(test_data) + '\n')"""
-                    im.save("images/catpure" + str(round(frame_num/10 + 1)) + ".jpeg", "jpeg")
-                    im.save("capture.jpeg", "jpeg")
+                    
                 frame_num = frame_num + 1
                 
                 # resize frames to avoid flicker for windows
