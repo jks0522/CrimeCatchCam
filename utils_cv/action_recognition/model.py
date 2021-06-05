@@ -673,7 +673,7 @@ class VideoLearner(object):
         def print_action(actionprint):
             now = datetime.datetime.now()
             txt_file = open("time.txt", 'w')
-            txt_file.write('time : ' +  str(now) + '\n')
+            txt_file.write(str(now) + '\n')
             txt_file = open("action.txt", 'w')
             txt_file.write(str(actionprint) + '\n')
             
