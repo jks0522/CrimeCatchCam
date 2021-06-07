@@ -767,5 +767,6 @@ class VideoLearner(object):
         :return:
         """
         self.model.load_state_dict(
-            torch.load(os.path.join(model_dir, f"{model_name}.pt"))
+            torch.load(os.path.join(model_dir, f"{model_name}.pt"), map_location=torch.device('cpu'))
         )
+        self.model.eval()
