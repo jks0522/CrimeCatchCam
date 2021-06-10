@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>위험행동 인식 데이터</title>
+        <meta charset="utf-8">
+        <link href="../static/css/hpcapture.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>위험행동 인식 데이터</h1>
+            <ul>
+                <li>위험행동 장면</li>
+                <li>위험행동 시간</li>
+                <li>위험행동 종류</li>
+            </ul>
+        </header>
+        <hr>
+        <nav>
+            <h3><img src="../static/images/목차.png" height="20"> 기록된 위험상황 시간/종류</h3>
+            <iframe id="iframeTime" src="loadAll.html" scrolling="no" frameborder="0"></iframe>
+        </nav>
+        <p id="number"></p>
+        <script>
+            var start, end, fullSrc, alreadySrc;
+            var i = 1;
+            function loadImg() {
+                start = '<img src="../../../../../../CrimeCatchCam/scenarios/action_recognition/images/capture'; // Path Reset
+                end = '.jpeg" height="100" title="' + i + '"alt="">';
+                fullSrc = start + i + end;
+                alreadySrc = document.getElementById("number").innerHTML + fullSrc;
+                document.getElementById("number").innerHTML = alreadySrc;
+                i++;
+                setTimeout("loadImg()", 10); // 0.05초 후에 printTime()을 호출
+            }
+            window.onload = function() { //HTML이 로딩되면 printTime()함수를 호출
+                loadImg();
+            }
+        </script>
+        <br>
+        <footer>
+            Copyright 2021 CrimeCatchCam
+        </footer>
+    </body>
+</html>

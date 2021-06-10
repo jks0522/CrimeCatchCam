@@ -1,0 +1,10 @@
+h1 {
+    text-align: center;
+}
+footer {
+    background-color: lightgray;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}

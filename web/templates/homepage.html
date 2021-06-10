@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>T12 CrimeCatchCam</title>
+        <meta charset="utf-8">
+        <link href="../static/css/homepage.css" type="text/css" rel="stylesheet">
+        <script language="javascript">
+            function showCrime() {
+                window.open("hpcrime.html", "a", "width=600, height=350, left=50, top=50");
+            }
+            function showCapture() {
+                window.open("hpcapture.html", "a", "width=1000, height=700, left=50, top=50");
+            }
+        </script>
+    </head>
+    <body>
+        <script>
+            let pw;
+            do {
+                pw=prompt("암호를 입력하세요.", "password");
+            } while(pw != "kbkim");
+        </script>
+        <header>
+            <h1>CrimeCatchCam 위험행동 알림</h1>
+            <p>CrimeCatchCam은 홈캠에 설치되는 위험행동 인식 프로그램입니다.<br>
+                기존 홈캠이 제공하는 집주인이 집을 비웠을 때 침입을 탐지하는 기능과는 다르게
+                실신, 폭행 등과 같은 사람이 집에 있을 때 발생할 수 있는 위험행동을 인식합니다.<br></p>
+        </header>
+        <hr>
+        <nav>
+            <h2><img src="../static/images/목차.png" height="20"> 목차</h2>
+            <table>
+                <tbody>
+                    <tr>
+                    <td>
+                        <a id="button" onclick="showCrime();">위험행동 종류</a>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                        <a id="button" onclick="showCapture();">위험행동 인식 데이터</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </nav>
+        <section>
+            <article>
+                <h2><img src="../static/images/모니터.png" height="20"> 위험 장면</h2>
+                <center>
+                    <iframe id="iframeImage" src="loadImage.html" scrolling="no" frameborder="0"></iframe>
+                </center>
+            </article>
+            <article>
+                <h2><img src="../static/images/알람.png" height="20"> 위험행동 종류</h2>
+                <iframe id="iframeAction" src="loadAction.html" scrolling="no" frameborder="0"></iframe>
+            </article>
+            <article>
+                <h2><img src="../static/images/시간.png" height="20"> 위험행동 발생 시간</h2>
+                <iframe id="iframeTime" src="loadTime.html" scrolling="no" frameborder="0"></iframe>
+                <br>
+            </article>
+        </section>
+        <footer>
+            Copyright 2021 CrimeCatchCam
+        </footer>
+    </body>
+</html>

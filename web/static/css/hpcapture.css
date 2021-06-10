@@ -1,0 +1,28 @@
+img {
+    transform : scale(1,1);
+}
+img:hover {
+    transform : scale(1.1,1.1);
+}
+h1 {
+    text-align: center;
+}
+nav {
+    width: 50%; height: 100%;
+    float: right;
+    overflow: hidden;
+}
+iframe {
+    width: 100%;
+    height: 650px;
+}
+embed {
+    height: 500px;
+}
+footer {
+    background-color: lightgray;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
