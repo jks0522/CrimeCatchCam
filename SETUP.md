@@ -33,7 +33,7 @@ to run the notebooks in this repository.
     ```
 1. At this point, you should be able to run the notebooks within the various [scenarios](scenarios) folders.
 
-이후 web폴더에서 경로설정을 
+이후 web폴더에서 README 파일을 읽고 경로설정을 해야합니다
 
 __pip install__
 
