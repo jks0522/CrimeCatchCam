@@ -33,6 +33,8 @@ to run the notebooks in this repository.
     ```
 1. At this point, you should be able to run the notebooks within the various [scenarios](scenarios) folders.
 
+이후 web폴더에서 
+
 __pip install__
 
 As an alternative to the steps above, and if you only want to install the 'utils_cv' library (without creating a new conda environment), this can be done using pip install. Note that this does not download the notebooks.
