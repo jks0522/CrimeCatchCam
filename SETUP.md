@@ -8,12 +8,8 @@ to run the notebooks in this repository.
 
 1. [Installation](#installation)
 1. [System Requirements](#system-requirements)
-1. [Compute Environment](#compute-environments)
-1. [Tunneling](#tunneling)
 
 ## Installation
-
-To install the repository and its dependencies follow these simple steps:  
 
 1. (optional) Install Anaconda with Python >= 3.6. [Miniconda](https://conda.io/miniconda.html). This step can be skipped if working on a Data Science Virtual Machine (see the compute environment section).
 
@@ -68,49 +64,5 @@ nvcc --version
 If you don't have CUDA Toolkit or don't have the right version, please download it from here: [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit)
 
 
-## Compute Environments
-
-Many computer visions scenarios are extremely computationally heavy. Training a model often requires a machine that has a strong GPU, and would otherwise be too slow.
-
-The easiest way to get started is to use the [Azure Data Science Virtual Machine (DSVM)](https://azure.microsoft.com/en-us/services/virtual-machines/data-science-virtual-machines/). This VM will come installed with all the system requirements that are needed to run the notebooks in this repository. If you choose this option, you can skip the [System Requirements](#system-requirements) step in this guide as those requirements come pre-installed on the DSVM.
-
-Before creating your Azure DSVM, you need to decide what kind of VM Size you want. Some VMs have GPUs, some have multiple GPUs, and some don't have any GPUs at all. For this repo, we recommend selecting an Ubuntu VM of the size [Standard_NC6_v3](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes-gpu#ncv3-series). The Standard_NC6_v3 uses the Nvidia Tesla V100 which will help us train our computer vision models and iterate quickly.
-
-For users new to Azure, your subscription may not come with a quota for GPUs. You may need to go into the Azure portal to increase your quota for GPU vms. Learn more about how to do this here: https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits.
-
-Here are some ways you can create the DSVM:
-
-__Provision a Data Science VM with the Azure Portal or CLI__
-
-You can also spin up a Data Science VM directly using the Azure portal. To do so, follow
-[this](https://docs.microsoft.com/en-us/azure/machine-learning/data-science-virtual-machine/dsvm-ubuntu-intro)
-link that shows you how to provision your Data Science VM through the portal.
-
-You can alternatively use the Azure command line (CLI) as well. Follow
-[this](https://docs.microsoft.com/en-us/cli/azure/azure-cli-vm-tutorial?view=azure-cli-latest)
-link to learn more about the Azure CLI and how it can be used to provision
-resources.
-
-__Virtual Machine Builder__
-
-One easy way to create your DSVM is to use the [VM Builder](contrib/vm_builder) tool located inside of the 'contrib' folder in the root directory of the repo. Note that this tool only runs on Linux and Mac, and is not well maintained and might stop working. Simply run `python contrib/vm_builder/vm_builder.py` at the root level of the repo and this tool will preconfigure your virtual machine with the appropriate settings for working with this repository.
 
 
-
-## Tunneling
-
-If your compute environment is on a Linux VM in the cloud, you can open a tunnel from your VM to your local machine using the following command:
-```
-$ssh -L local_port:remote_address:remote_port  <username>@<server-ip>
-```
-
-For example, if I want to run `jupyter notebook --port 8888` on my VM and I
-wish to run the Jupyter notebooks on my local broswer on `localhost:9999`, I
-would ssh into my VM using the following command:
-
-```
-$ssh -L 9999:localhost:8888 <username>@<server-ip>
-```
-
-This command will allow your local machine's port `9999` to access your remote
-machine's port `8888`.
